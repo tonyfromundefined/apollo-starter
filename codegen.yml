@@ -14,4 +14,4 @@ config:
   useIndexSignature: true
   defaultMapper: Partial<{T}>
   mappers:
-    Version: '../../models/version#IModelVersion'
+    Version: '../../models/version#ModelVersion'
