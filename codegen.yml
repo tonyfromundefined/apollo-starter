@@ -12,6 +12,6 @@ generates:
 config:
   # typesPrefix: I
   useIndexSignature: true
-  defaultMapper: Partial<{T}>
   mappers:
+    MetaQueries: '{}'
     Version: '../../models/version#ModelVersion'

@@ -4,7 +4,4 @@ export const Version: VersionResolvers = {
   stage: () => {
     return Stage.Development
   },
-  abc: () => {
-    return 'abc'
-  },
 }

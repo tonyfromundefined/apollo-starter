@@ -1,7 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { ModelVersion } from '../../models/version';
 export type Maybe<T> = T | null;
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -32,7 +31,6 @@ export type Version = {
   shortHash: Scalars['String'],
   hash: Scalars['String'],
   committedOn: Scalars['String'],
-  abc: Scalars['String'],
 };
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
@@ -107,21 +105,21 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>,
-  MetaQueries: ResolverTypeWrapper<Partial<Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] }>>,
+  MetaQueries: ResolverTypeWrapper<{}>,
   Version: ResolverTypeWrapper<ModelVersion>,
-  Stage: ResolverTypeWrapper<Partial<Stage>>,
-  String: ResolverTypeWrapper<Partial<Scalars['String']>>,
-  Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']>>,
+  Stage: Stage,
+  String: ResolverTypeWrapper<Scalars['String']>,
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Query: {},
-  MetaQueries: Partial<Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] }>,
+  MetaQueries: {},
   Version: ModelVersion,
-  Stage: Partial<Stage>,
-  String: Partial<Scalars['String']>,
-  Boolean: Partial<Scalars['Boolean']>,
+  Stage: Stage,
+  String: Scalars['String'],
+  Boolean: Scalars['Boolean'],
 }>;
 
 export type MetaQueriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['MetaQueries'] = ResolversParentTypes['MetaQueries']> = ResolversObject<{
@@ -137,7 +135,6 @@ export type VersionResolvers<ContextType = any, ParentType extends ResolversPare
   shortHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   hash?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   committedOn?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  abc?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
