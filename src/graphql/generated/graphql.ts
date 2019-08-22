@@ -22,13 +22,16 @@ export type IQuery = {
 };
 
 export enum IStage {
-  Development = 'DEVELOPMENT',
-  Production = 'PRODUCTION'
+  Development = 'Development',
+  Production = 'Production'
 }
 
 export type IVersion = {
   __typename?: 'Version',
   stage: IStage,
+  shortHash: Scalars['String'],
+  hash: Scalars['String'],
+  committedOn: Scalars['String'],
 };
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
@@ -130,6 +133,9 @@ export type IQueryResolvers<ContextType = any, ParentType extends IResolversPare
 
 export type IVersionResolvers<ContextType = any, ParentType extends IResolversParentTypes['Version'] = IResolversParentTypes['Version']> = ResolversObject<{
   stage?: Resolver<IResolversTypes['Stage'], ParentType, ContextType>,
+  shortHash?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
+  hash?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
+  committedOn?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
 }>;
 
 export type IResolvers<ContextType = any> = ResolversObject<{
