@@ -1,0 +1,16 @@
+type MetaQueries {
+  version: Version!
+}
+
+type Query {
+  meta: MetaQueries!
+}
+
+enum Stage {
+  DEVELOPMENT
+  PRODUCTION
+}
+
+type Version {
+  stage: Stage!
+}

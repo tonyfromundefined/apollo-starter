@@ -6,7 +6,8 @@
   "linterOptions": {
     "exclude": [
       "node_modules/**/*.ts",
-      "dist/**/*.js"
+      "dist/**/*.js",
+      "src/graphql/generated/graphql.ts"
     ]
   },
   "rules": {

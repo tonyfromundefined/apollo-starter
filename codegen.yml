@@ -1,0 +1,17 @@
+overwrite: true
+schema: './src/graphql/index.graphql'
+documents: null
+generates:
+  src/graphql/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-resolvers'
+  src/graphql/generated/schema.graphql:
+    plugins:
+      - 'schema-ast'
+config:
+  typesPrefix: I
+  useIndexSignature: true
+  defaultMapper: Partial<{T}>
+  mappers:
+    Version: '../../models/version#IModelVersion'

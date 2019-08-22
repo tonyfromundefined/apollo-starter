@@ -1,0 +1,8 @@
+type Version {
+  stage: Stage!
+}
+
+enum Stage {
+  DEVELOPMENT
+  PRODUCTION
+}

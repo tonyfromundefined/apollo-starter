@@ -11,7 +11,7 @@ async function main() {
   app.listen(port, () => {
     if (!isProd) {
       /* tslint:disable-next-line */
-      console.log(`⚙️ Apollo Starter가 http://localhost:${port} 에서 작동중입니다`)
+      console.log(`Log 13188: Apollo Starter가 http://localhost:${port} 에서 작동중입니다`)
     }
   })
 }
