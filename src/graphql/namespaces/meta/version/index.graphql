@@ -3,6 +3,7 @@ type Version {
   shortHash: String!
   hash: String!
   committedOn: String!
+  abc: String!
 }
 
 enum Stage {

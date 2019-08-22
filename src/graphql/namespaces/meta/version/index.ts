@@ -1,7 +1,10 @@
-import { IStage, IVersionResolvers } from '../../../generated/graphql'
+import { Stage, VersionResolvers } from '../../../generated/graphql'
 
-export const Version: IVersionResolvers = {
+export const Version: VersionResolvers = {
   stage: () => {
-    return IStage.Development
+    return Stage.Development
+  },
+  abc: () => {
+    return 'abc'
   },
 }

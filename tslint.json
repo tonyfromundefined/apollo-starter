@@ -26,6 +26,7 @@
     "max-classes-per-file": false,
     "jsx-no-multiline-js": false,
     "member-ordering": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "interface-name": false
   }
 }

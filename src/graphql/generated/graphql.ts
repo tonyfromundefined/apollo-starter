@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { IModelVersion } from '../../models/version';
+import { ModelVersion } from '../../models/version';
 export type Maybe<T> = T | null;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -11,27 +11,28 @@ export type Scalars = {
   Float: number,
 };
 
-export type IMetaQueries = {
+export type MetaQueries = {
   __typename?: 'MetaQueries',
-  version: IVersion,
+  version: Version,
 };
 
-export type IQuery = {
+export type Query = {
   __typename?: 'Query',
-  meta: IMetaQueries,
+  meta: MetaQueries,
 };
 
-export enum IStage {
+export enum Stage {
   Development = 'Development',
   Production = 'Production'
 }
 
-export type IVersion = {
+export type Version = {
   __typename?: 'Version',
-  stage: IStage,
+  stage: Stage,
   shortHash: Scalars['String'],
   hash: Scalars['String'],
   committedOn: Scalars['String'],
+  abc: Scalars['String'],
 };
 export type WithIndex<TObject> = TObject & Record<string, any>;
 export type ResolversObject<TObject> = WithIndex<TObject>;
@@ -104,44 +105,50 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type IResolversTypes = ResolversObject<{
+export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>,
-  MetaQueries: ResolverTypeWrapper<Partial<Omit<IMetaQueries, 'version'> & { version: IResolversTypes['Version'] }>>,
-  Version: ResolverTypeWrapper<IModelVersion>,
-  Stage: ResolverTypeWrapper<Partial<IStage>>,
+  MetaQueries: ResolverTypeWrapper<Partial<Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] }>>,
+  Version: ResolverTypeWrapper<ModelVersion>,
+  Stage: ResolverTypeWrapper<Partial<Stage>>,
   String: ResolverTypeWrapper<Partial<Scalars['String']>>,
   Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']>>,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type IResolversParentTypes = ResolversObject<{
+export type ResolversParentTypes = ResolversObject<{
   Query: {},
-  MetaQueries: Partial<Omit<IMetaQueries, 'version'> & { version: IResolversTypes['Version'] }>,
-  Version: IModelVersion,
-  Stage: Partial<IStage>,
+  MetaQueries: Partial<Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] }>,
+  Version: ModelVersion,
+  Stage: Partial<Stage>,
   String: Partial<Scalars['String']>,
   Boolean: Partial<Scalars['Boolean']>,
 }>;
 
-export type IMetaQueriesResolvers<ContextType = any, ParentType extends IResolversParentTypes['MetaQueries'] = IResolversParentTypes['MetaQueries']> = ResolversObject<{
-  version?: Resolver<IResolversTypes['Version'], ParentType, ContextType>,
+export type MetaQueriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['MetaQueries'] = ResolversParentTypes['MetaQueries']> = ResolversObject<{
+  version?: Resolver<ResolversTypes['Version'], ParentType, ContextType>,
 }>;
 
-export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = ResolversObject<{
-  meta?: Resolver<IResolversTypes['MetaQueries'], ParentType, ContextType>,
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  meta?: Resolver<ResolversTypes['MetaQueries'], ParentType, ContextType>,
 }>;
 
-export type IVersionResolvers<ContextType = any, ParentType extends IResolversParentTypes['Version'] = IResolversParentTypes['Version']> = ResolversObject<{
-  stage?: Resolver<IResolversTypes['Stage'], ParentType, ContextType>,
-  shortHash?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
-  hash?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
-  committedOn?: Resolver<IResolversTypes['String'], ParentType, ContextType>,
+export type VersionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Version'] = ResolversParentTypes['Version']> = ResolversObject<{
+  stage?: Resolver<ResolversTypes['Stage'], ParentType, ContextType>,
+  shortHash?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  hash?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  committedOn?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  abc?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 }>;
 
-export type IResolvers<ContextType = any> = ResolversObject<{
-  MetaQueries?: IMetaQueriesResolvers<ContextType>,
-  Query?: IQueryResolvers<ContextType>,
-  Version?: IVersionResolvers<ContextType>,
+export type Resolvers<ContextType = any> = ResolversObject<{
+  MetaQueries?: MetaQueriesResolvers<ContextType>,
+  Query?: QueryResolvers<ContextType>,
+  Version?: VersionResolvers<ContextType>,
 }>;
 
 
+/**
+ * @deprecated
+ * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
+*/
+export type IResolvers<ContextType = any> = Resolvers<ContextType>;

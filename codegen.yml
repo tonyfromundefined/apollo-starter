@@ -10,7 +10,7 @@ generates:
     plugins:
       - 'schema-ast'
 config:
-  typesPrefix: I
+  # typesPrefix: I
   useIndexSignature: true
   defaultMapper: Partial<{T}>
   mappers:

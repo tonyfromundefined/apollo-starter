@@ -1,7 +1,7 @@
 import { getVersion } from '../../../models'
-import { IMetaQueriesResolvers } from '../../generated/graphql'
+import { MetaQueriesResolvers } from '../../generated/graphql'
 
-export const MetaQueries: IMetaQueriesResolvers = {
+export const MetaQueries: MetaQueriesResolvers = {
   version: () => getVersion(),
 }
 
