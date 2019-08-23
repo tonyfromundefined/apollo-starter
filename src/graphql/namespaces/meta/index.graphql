@@ -1,5 +1,0 @@
-# import * from './version/index.graphql'
-
-type MetaQueries {
-  version: Version!
-}

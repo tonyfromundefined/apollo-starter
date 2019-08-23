@@ -1,0 +1,11 @@
+# import * from './namespaces/meta/index.graphql'
+# import * from './namespaces/sample/index.graphql'
+
+type Query {
+  meta: MetaQueries!
+  sample: SampleQueries!
+}
+
+type Mutation {
+  sample: SampleMutations!
+}

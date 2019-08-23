@@ -1,4 +1,4 @@
-import { Stage, VersionResolvers } from '../../../generated/graphql'
+import { Stage, VersionResolvers } from '~/generated/graphql'
 
 export const Version: VersionResolvers = {
   stage: () => {

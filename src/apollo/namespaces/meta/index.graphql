@@ -9,3 +9,7 @@ enum Stage {
   Development
   Production
 }
+
+type MetaQueries {
+  version: Version!
+}

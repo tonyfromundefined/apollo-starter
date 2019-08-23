@@ -1,0 +1,37 @@
+type MetaQueries {
+  version: Version!
+}
+
+type Mutation {
+  sample: SampleMutations!
+}
+
+type Query {
+  meta: MetaQueries!
+  sample: SampleQueries!
+}
+
+type SampleMutations {
+  createTask(content: String!): Task!
+}
+
+type SampleQueries {
+  tasks: [Task!]!
+}
+
+enum Stage {
+  Development
+  Production
+}
+
+type Task {
+  id: ID!
+  content: String!
+}
+
+type Version {
+  stage: Stage!
+  shortHash: String!
+  hash: String!
+  committedOn: String!
+}

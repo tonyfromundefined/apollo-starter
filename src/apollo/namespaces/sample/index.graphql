@@ -1,0 +1,12 @@
+type Task {
+  id: ID!
+  content: String!
+}
+
+type SampleQueries {
+  tasks: [Task!]!
+}
+
+type SampleMutations {
+  createTask(content: String!): Task!
+}

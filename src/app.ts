@@ -1,9 +1,11 @@
 import express from 'express'
 import { Connection } from 'typeorm'
-import { apolloServer } from './graphql'
+import { createApolloServer } from '~/apollo'
 
-export async function createApp(_connection: Connection) {
+export async function createApp(connection: Connection) {
   const app = express()
+
+  const apolloServer = createApolloServer(connection)
 
   apolloServer.applyMiddleware({ app })
 

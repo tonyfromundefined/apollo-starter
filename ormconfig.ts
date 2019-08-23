@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm'
-import { User } from './src/entities/User'
+import { Task } from './src/entities/Task'
 
 const option: ConnectionOptions = {
   type: 'postgres',
@@ -8,10 +8,10 @@ const option: ConnectionOptions = {
   username: 'sampleuser',
   password: 'samplesecret',
   database: 'sampledb',
-  synchronize: false,
+  synchronize: true,
   logging: false,
   entities: [
-    User,
+    Task,
   ],
   migrations: [
     'dist/migrations/**/*.js',

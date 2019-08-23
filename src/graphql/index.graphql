@@ -1,5 +1,0 @@
-# import * from './namespaces/meta/index.graphql'
-
-type Query {
-  meta: MetaQueries!
-}
