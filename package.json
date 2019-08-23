@@ -10,7 +10,9 @@
     "prebuild": "yarn generate && rimraf ./dist",
     "build": "webpack --config webpack.config.prod.js",
     "start": "dotenv -e .env.production -- node ./dist/index.js",
-    "lint": "tslint --project ."
+    "lint": "tslint --project .",
+    "typeorm:migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
+    "typeorm:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "dependencies": {
     "apollo-server-express": "^2.8.2",
