@@ -20,9 +20,9 @@ const Mutation: MutationResolvers = {
 }
 
 export interface Context {
-  store: EntityManager
   req: Request
   res: Response
+  store: EntityManager
 }
 
 export function createApolloServer(connection: Connection) {
@@ -38,9 +38,9 @@ export function createApolloServer(connection: Connection) {
     playground: introspection,
     tracing,
     context: ({ req, res }) => ({
-      store: connection.manager,
       req,
       res,
+      store: connection.manager,
     } as Context),
   })
 }
