@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "predev": "rm -rf dist",
     "dev": "dotenv -e .env.development -- webpack --config webpack.config.dev.js --info-verbosity none",
     "debug": "dotenv -e .env.development -- ts-node-dev --respawn --transpileOnly --inspect ./src/index.ts",
     "generate": "graphql-codegen --config codegen.yml",
