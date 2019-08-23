@@ -27,6 +27,7 @@
     "graphql-import": "^0.7.1",
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.13",
     "typeorm": "^0.2.18"
   },
   "devDependencies": {
