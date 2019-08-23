@@ -8,14 +8,15 @@ const option: ConnectionOptions = {
   username: 'sampleuser',
   password: 'samplesecret',
   database: 'sampledb',
-  synchronize: true,
-  logging: false,
+  synchronize: false,
+  logging: true,
+  migrationsRun: false,
   entities: [
     Task,
   ],
   migrations: [
     'dist/migrations/**/*.js',
-    'src/migrations/**/*.ts',
+    // 'src/migrations/**/*.ts',
   ],
   subscribers: [
     'src/subscribers/**/*.ts',

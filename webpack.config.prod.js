@@ -5,21 +5,19 @@ const nodeExternals = require('webpack-node-externals')
 
 const tsconfigFile = path.resolve(__dirname, './tsconfig.json')
 
-const configurations = []
+const configs = []
 
-configurations.push({
+configs.push({
   mode: 'production',
   entry: {
     index: path.resolve(__dirname, './src/index.ts'),
-  },
-  optimization: {
-    minimize: false,
   },
   output: {
     filename: 'index.min.js',
     libraryTarget: 'commonjs',
     path: path.resolve(__dirname, './dist'),
   },
+  target: 'node',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -44,11 +42,14 @@ configurations.push({
   node: {
     __dirname: false,
   },
-  stats: 'errors-only',
-  target: 'node',
   externals: [
     nodeExternals(),
   ],
+  optimization: {
+    minimize: false,
+  },
+  devtool: 'cheap-source-map',
+  stats: 'errors-only',
   plugins: [
     new WebpackbarPlugin({
       color: '#fa5252',
@@ -58,28 +59,55 @@ configurations.push({
 })
 
 const migrationEntries = {}
-const migrationFilenames = glob.sync(path.resolve('src/db/migrations/*.ts'))
+const migrationFilenames = glob.sync(path.resolve('src/migrations/*.ts'))
 
 for (const migrationFilename of migrationFilenames) {
   const migrationName = path.basename(migrationFilename, '.ts')
 
-  Object.assign({}, migrationEntries, {
+  Object.assign(migrationEntries, {
     [migrationName]: migrationFilename,
   })
 }
 
 if (Object.keys(migrationEntries).length > 0) {
-  configurations.push({
+  configs.push({
+    mode: 'production',
     entry: migrationEntries,
-    resolve: {
-      extensions: ['.ts'],
-    },
     output: {
       path: path.resolve(__dirname, './dist/migrations'),
       libraryTarget: 'umd',
       filename: '[name].js',
     },
+    target: 'node',
+    resolve: {
+      extensions: ['.ts'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
+        },
+      ],
+    },
+    optimization: {
+      minimize: false,
+    },
+    externals: [
+      nodeExternals(),
+    ],
+    devtool: 'cheap-source-map',
+    stats: 'errors-only',
+    plugins: [
+      new WebpackbarPlugin({
+        color: '#fcc419',
+        name: 'Migrations',
+      }),
+    ],
   })
 }
 
-module.exports = configurations
+module.exports = configs
