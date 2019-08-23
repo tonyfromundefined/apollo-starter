@@ -48,7 +48,7 @@ configs.push({
   optimization: {
     minimize: false,
   },
-  devtool: 'cheap-source-map',
+  devtool: 'inline-source-map',
   stats: 'errors-only',
   plugins: [
     new WebpackbarPlugin({

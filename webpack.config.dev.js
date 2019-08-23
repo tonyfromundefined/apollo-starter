@@ -50,7 +50,7 @@ configs.push({
   optimization: {
     minimize: false,
   },
-  devtool: 'cheap-source-map',
+  devtool: 'inline-source-map',
   stats: 'errors-only',
   watch: true,
   plugins: [
@@ -58,7 +58,9 @@ configs.push({
       color: '#1c7ed6',
       name: 'Development',
     }),
-    new NodemonPlugin(),
+    new NodemonPlugin({
+      nodeArgs: ['--inspect'],
+    }),
     new ForkTsCheckerWebpackPlugin({
       tsconfig: tsconfigFile,
     }),

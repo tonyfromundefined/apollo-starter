@@ -4,16 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "predev": "rimraf ./dist",
+    "predev": "yarn graphql:generate && rimraf ./dist",
     "dev": "dotenv -e .env.development -- webpack --config webpack.config.dev.js --info-verbosity none",
-    "debug": "dotenv -e .env.development -- ts-node-dev --respawn --transpileOnly --inspect ./src/index.ts",
-    "generate": "graphql-codegen --config codegen.yml",
-    "prebuild": "yarn generate && rimraf ./dist",
+    "prebuild": "yarn graphql:generate && rimraf ./dist",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "dotenv -e .env.production -- node ./dist/index.js",
-    "lint": "tslint --project .",
+    "start": "dotenv -e .env.production -- node ./dist/index.min.js",
+    "graphql:generate": "graphql-codegen --config codegen.yml",
     "typeorm:migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
-    "typeorm:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
+    "typeorm:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "lint": "tslint --project ."
   },
   "dependencies": {
     "apollo-server-express": "^2.8.2",
