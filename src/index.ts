@@ -1,8 +1,6 @@
 import 'reflect-metadata'
 import 'source-map-support/register'
 
-import { createConnection } from 'typeorm'
-import ormconfig from '../ormconfig'
 import { createApp } from './app'
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -11,10 +9,7 @@ const port = isProd ? 80 : 2727
 main()
 
 async function main() {
-  const connection = await createConnection({
-    ...ormconfig,
-  })
-  const app = await createApp(connection)
+  const app = await createApp()
 
   app.listen(port, () => {
     if (!isProd) {
