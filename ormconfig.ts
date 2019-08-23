@@ -16,7 +16,6 @@ const option: ConnectionOptions = {
   ],
   migrations: [
     'dist/migrations/**/*.js',
-    // 'src/migrations/**/*.ts',
   ],
   subscribers: [
     'src/subscribers/**/*.ts',
