@@ -7,8 +7,8 @@
     "dev": "dotenv -e .env.development -- webpack --config webpack.config.dev.js --info-verbosity none",
     "debug": "dotenv -e .env.development -- ts-node-dev --respawn --transpileOnly --inspect ./src/index.ts",
     "generate": "graphql-codegen --config codegen.yml",
-    "prebuild": "rimraf ./dist && yarn generate",
-    "build": "tsc && cp ./src/graphql/generated/schema.graphql ./dist/graphql/generated/schema.graphql",
+    "prebuild": "yarn generate && rimraf ./dist",
+    "build": "webpack --config webpack.config.prod.js",
     "start": "dotenv -e .env.production -- node ./dist/index.js",
     "lint": "tslint --project ."
   },
@@ -19,8 +19,12 @@
     "es6-promisify": "^6.0.1",
     "express": "^4.17.1",
     "git-last-commit": "^1.0.0",
+    "glob": "^7.1.4",
     "graphql": "^14.4.2",
-    "graphql-import": "^0.7.1"
+    "graphql-import": "^0.7.1",
+    "pg": "^7.12.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.18"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.6.1",

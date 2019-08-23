@@ -4,7 +4,7 @@ const NodemonPlugin = require('nodemon-webpack-plugin')
 const WebpackbarPlugin = require('webpackbar')
 const nodeExternals = require('webpack-node-externals')
 
-const configFile = path.resolve(__dirname, './tsconfig.json')
+const tsconfigFile = path.resolve(__dirname, './tsconfig.json')
 
 module.exports = {
   mode: 'development',
@@ -57,7 +57,7 @@ module.exports = {
     }),
     new NodemonPlugin(),
     new ForkTsCheckerWebpackPlugin({
-      tsconfig: configFile,
+      tsconfig: tsconfigFile,
     }),
   ],
 }

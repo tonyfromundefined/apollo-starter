@@ -2,6 +2,8 @@ node_modules
 
 dist
 
+.database
+
 .env.development
 .env.production
 
