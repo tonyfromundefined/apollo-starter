@@ -31,7 +31,7 @@
     "@types/express": "^4.17.1",
     "@types/graphql": "^14.2.3",
     "fork-ts-checker-webpack-plugin": "^1.5.0",
-    "graphql-import-loader": "^0.2.1",
+    "graphql-import-webpack-loader": "^1.0.0",
     "nodemon-webpack-plugin": "^4.0.8",
     "ts-loader": "^6.0.4",
     "ts-node-dev": "^1.0.0-pre.41",

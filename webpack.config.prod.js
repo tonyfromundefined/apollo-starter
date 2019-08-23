@@ -2,7 +2,6 @@ const path = require('path')
 const WebpackbarPlugin = require('webpackbar')
 const nodeExternals = require('webpack-node-externals')
 
-const graphqlImportLoader = path.resolve(__dirname, './graphql-import-loader.js')
 const configFile = path.resolve(__dirname, './tsconfig.json')
 
 module.exports = {
@@ -35,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.graphql$/,
-        loader: graphqlImportLoader,
+        loader: 'graphql-import-webpack-loader',
       },
     ],
   },
