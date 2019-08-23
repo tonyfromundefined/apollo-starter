@@ -14,5 +14,5 @@ config:
   contextType: '~/apollo#Context'
   useIndexSignature: true
   mappers:
-    Version: '~/utils/version#ModelVersion'
+    Version: '~/utils/version#Version'
     Task: '~/entities/Task#Task'

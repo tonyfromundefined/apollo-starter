@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { ModelVersion } from '~/utils/version';
+import { Version } from '~/utils/version';
 import { Task } from '~/entities/Task';
 import { Context } from '~/apollo';
 export type Maybe<T> = T | null;
@@ -137,7 +137,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>,
   MetaQueries: ResolverTypeWrapper<Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] }>,
-  Version: ResolverTypeWrapper<ModelVersion>,
+  Version: ResolverTypeWrapper<Version>,
   Stage: Stage,
   String: ResolverTypeWrapper<Scalars['String']>,
   SampleQueries: ResolverTypeWrapper<Omit<SampleQueries, 'tasks'> & { tasks: Array<ResolversTypes['Task']> }>,
@@ -152,7 +152,7 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Query: {},
   MetaQueries: Omit<MetaQueries, 'version'> & { version: ResolversTypes['Version'] },
-  Version: ModelVersion,
+  Version: Version,
   Stage: Stage,
   String: Scalars['String'],
   SampleQueries: Omit<SampleQueries, 'tasks'> & { tasks: Array<ResolversTypes['Task']> },
