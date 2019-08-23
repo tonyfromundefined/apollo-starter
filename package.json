@@ -1,7 +1,6 @@
 {
   "name": "apollo-starter",
   "version": "0.0.1",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "predev": "yarn graphql:generate && rimraf ./dist",

@@ -5,7 +5,7 @@ export * from './resolvers'
 
 export const SampleQueries: SampleQueriesResolvers = {
   tasks: (_parent, _args, context) => {
-    return context.connection.manager.find(Task)
+    return context.store.find(Task)
   },
 }
 
@@ -14,6 +14,6 @@ export const SampleMutations: SampleMutationsResolvers = {
     const task = new Task()
     task.content = args.content
 
-    return await context.connection.manager.save(task)
+    return await context.store.save(task)
   },
 }

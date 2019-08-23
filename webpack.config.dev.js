@@ -15,7 +15,7 @@ configs.push({
     index: path.resolve(__dirname, './src/index.ts'),
   },
   output: {
-    filename: 'index.js',
+    filename: 'index.min.js',
     libraryTarget: 'commonjs',
     path: path.resolve(__dirname, './dist'),
   },

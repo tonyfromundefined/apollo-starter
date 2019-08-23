@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server-express'
-import { Connection } from 'typeorm'
+import { Request, Response } from 'express-serve-static-core'
+import { Connection, EntityManager } from 'typeorm'
 import { MutationResolvers, QueryResolvers } from '~/generated/graphql'
 import * as Meta from './namespaces/meta'
 import * as Sample from './namespaces/sample'
@@ -19,14 +20,12 @@ const Mutation: MutationResolvers = {
 }
 
 export interface Context {
-  connection: Connection
+  store: EntityManager
+  req: Request
+  res: Response
 }
 
 export function createApolloServer(connection: Connection) {
-  const context: Context = {
-    connection,
-  }
-
   return new ApolloServer({
     typeDefs,
     resolvers: {
@@ -38,6 +37,10 @@ export function createApolloServer(connection: Connection) {
     introspection,
     playground: introspection,
     tracing,
-    context,
+    context: ({ req, res }) => ({
+      store: connection.manager,
+      req,
+      res,
+    } as Context),
   })
 }
