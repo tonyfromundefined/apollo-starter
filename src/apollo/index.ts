@@ -1,4 +1,4 @@
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-koa'
 import { Request, Response } from 'express-serve-static-core'
 import { Connection, EntityManager } from 'typeorm'
 import { MutationResolvers, QueryResolvers } from '~/generated/graphql'
