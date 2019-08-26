@@ -9,3 +9,9 @@ type Query {
 type Mutation {
   sample: SampleMutations!
 }
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+}

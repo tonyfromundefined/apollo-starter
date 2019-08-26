@@ -6,6 +6,12 @@ type Mutation {
   sample: SampleMutations!
 }
 
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+}
+
 type Query {
   meta: MetaQueries!
   sample: SampleQueries!
@@ -16,7 +22,7 @@ type SampleMutations {
 }
 
 type SampleQueries {
-  tasks: [Task!]!
+  tasks: TaskConnection!
 }
 
 enum Stage {
@@ -27,6 +33,16 @@ enum Stage {
 type Task {
   id: ID!
   content: String!
+}
+
+type TaskConnection {
+  edges: [TaskEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TaskEdge {
+  node: Task!
+  cursor: String!
 }
 
 type Version {

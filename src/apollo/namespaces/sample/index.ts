@@ -4,8 +4,22 @@ import { SampleMutationsResolvers, SampleQueriesResolvers } from '~/generated/gr
 export * from './resolvers'
 
 export const SampleQueries: SampleQueriesResolvers = {
-  tasks: (_parent, _args, context) => {
-    return context.store.find(Task)
+  tasks: async (_parent, _args, context) => {
+    const tasks = await context.store.find(Task)
+
+    const endCursor: string | null = tasks.length ? String(tasks[tasks.length - 1].id) : null
+
+    return {
+      edges: tasks.map((task) => ({
+        node: task,
+        cursor: String(task.id),
+      })),
+      pageInfo: {
+        endCursor,
+        hasNextPage: true,
+        hasPrevPage: true,
+      },
+    }
   },
 }
 

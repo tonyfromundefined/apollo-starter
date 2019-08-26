@@ -24,6 +24,13 @@ export type Mutation = {
   sample: SampleMutations,
 };
 
+export type PageInfo = {
+  __typename?: 'PageInfo',
+  endCursor?: Maybe<Scalars['String']>,
+  hasNextPage: Scalars['Boolean'],
+  hasPrevPage: Scalars['Boolean'],
+};
+
 export type Query = {
   __typename?: 'Query',
   meta: MetaQueries,
@@ -42,7 +49,7 @@ export type SampleMutationsCreateTaskArgs = {
 
 export type SampleQueries = {
   __typename?: 'SampleQueries',
-  tasks: Array<Task>,
+  tasks: TaskConnection,
 };
 
 export enum Stage {
@@ -54,6 +61,18 @@ export type Task = {
   __typename?: 'Task',
   id: Scalars['ID'],
   content: Scalars['String'],
+};
+
+export type TaskConnection = {
+  __typename?: 'TaskConnection',
+  edges: Array<TaskEdge>,
+  pageInfo: PageInfo,
+};
+
+export type TaskEdge = {
+  __typename?: 'TaskEdge',
+  node: Task,
+  cursor: Scalars['String'],
 };
 
 export type Version = {
@@ -140,12 +159,15 @@ export type ResolversTypes = ResolversObject<{
   Version: ResolverTypeWrapper<Version>,
   Stage: Stage,
   String: ResolverTypeWrapper<Scalars['String']>,
-  SampleQueries: ResolverTypeWrapper<Omit<SampleQueries, 'tasks'> & { tasks: Array<ResolversTypes['Task']> }>,
+  SampleQueries: ResolverTypeWrapper<Omit<SampleQueries, 'tasks'> & { tasks: ResolversTypes['TaskConnection'] }>,
+  TaskConnection: ResolverTypeWrapper<Omit<TaskConnection, 'edges'> & { edges: Array<ResolversTypes['TaskEdge']> }>,
+  TaskEdge: ResolverTypeWrapper<Omit<TaskEdge, 'node'> & { node: ResolversTypes['Task'] }>,
   Task: ResolverTypeWrapper<Task>,
   ID: ResolverTypeWrapper<Scalars['ID']>,
+  PageInfo: ResolverTypeWrapper<PageInfo>,
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Mutation: ResolverTypeWrapper<{}>,
   SampleMutations: ResolverTypeWrapper<Omit<SampleMutations, 'createTask'> & { createTask: ResolversTypes['Task'] }>,
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -155,12 +177,15 @@ export type ResolversParentTypes = ResolversObject<{
   Version: Version,
   Stage: Stage,
   String: Scalars['String'],
-  SampleQueries: Omit<SampleQueries, 'tasks'> & { tasks: Array<ResolversTypes['Task']> },
+  SampleQueries: Omit<SampleQueries, 'tasks'> & { tasks: ResolversTypes['TaskConnection'] },
+  TaskConnection: Omit<TaskConnection, 'edges'> & { edges: Array<ResolversTypes['TaskEdge']> },
+  TaskEdge: Omit<TaskEdge, 'node'> & { node: ResolversTypes['Task'] },
   Task: Task,
   ID: Scalars['ID'],
+  PageInfo: PageInfo,
+  Boolean: Scalars['Boolean'],
   Mutation: {},
   SampleMutations: Omit<SampleMutations, 'createTask'> & { createTask: ResolversTypes['Task'] },
-  Boolean: Scalars['Boolean'],
 }>;
 
 export type MetaQueriesResolvers<ContextType = Context, ParentType extends ResolversParentTypes['MetaQueries'] = ResolversParentTypes['MetaQueries']> = ResolversObject<{
@@ -169,6 +194,12 @@ export type MetaQueriesResolvers<ContextType = Context, ParentType extends Resol
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   sample?: Resolver<ResolversTypes['SampleMutations'], ParentType, ContextType>,
+}>;
+
+export type PageInfoResolvers<ContextType = Context, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = ResolversObject<{
+  endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  hasPrevPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -181,12 +212,22 @@ export type SampleMutationsResolvers<ContextType = Context, ParentType extends R
 }>;
 
 export type SampleQueriesResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SampleQueries'] = ResolversParentTypes['SampleQueries']> = ResolversObject<{
-  tasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>,
+  tasks?: Resolver<ResolversTypes['TaskConnection'], ParentType, ContextType>,
 }>;
 
 export type TaskResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+}>;
+
+export type TaskConnectionResolvers<ContextType = Context, ParentType extends ResolversParentTypes['TaskConnection'] = ResolversParentTypes['TaskConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['TaskEdge']>, ParentType, ContextType>,
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>,
+}>;
+
+export type TaskEdgeResolvers<ContextType = Context, ParentType extends ResolversParentTypes['TaskEdge'] = ResolversParentTypes['TaskEdge']> = ResolversObject<{
+  node?: Resolver<ResolversTypes['Task'], ParentType, ContextType>,
+  cursor?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
 }>;
 
 export type VersionResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Version'] = ResolversParentTypes['Version']> = ResolversObject<{
@@ -199,10 +240,13 @@ export type VersionResolvers<ContextType = Context, ParentType extends Resolvers
 export type Resolvers<ContextType = Context> = ResolversObject<{
   MetaQueries?: MetaQueriesResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
+  PageInfo?: PageInfoResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   SampleMutations?: SampleMutationsResolvers<ContextType>,
   SampleQueries?: SampleQueriesResolvers<ContextType>,
   Task?: TaskResolvers<ContextType>,
+  TaskConnection?: TaskConnectionResolvers<ContextType>,
+  TaskEdge?: TaskEdgeResolvers<ContextType>,
   Version?: VersionResolvers<ContextType>,
 }>;
 

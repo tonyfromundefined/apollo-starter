@@ -1,12 +1,22 @@
+type SampleQueries {
+  tasks: TaskConnection!
+}
+
+type SampleMutations {
+  createTask(content: String!): Task!
+}
+
 type Task {
   id: ID!
   content: String!
 }
 
-type SampleQueries {
-  tasks: [Task!]!
+type TaskConnection {
+  edges: [TaskEdge!]!
+  pageInfo: PageInfo!
 }
 
-type SampleMutations {
-  createTask(content: String!): Task!
+type TaskEdge {
+  node: Task!
+  cursor: String!
 }
